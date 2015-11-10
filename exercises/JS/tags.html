@@ -4,6 +4,23 @@
 		<script type='text/javascript'>
 			// make functionality goes here
 			make = {};
+      var tags = ['a', 'div', 'span', 'form', 'h1', 'h2', 'h3', 'h4'];
+
+      // good expression of how closures work
+      //for (var i = 0; i < tags.length; i++) {
+      //  (function(tag) {
+      //    make[tag] = function() {
+      //      return document.createElement(tag);
+      //    };
+      //  })(tags[i]);
+      //}
+
+      // cleaner way to right
+      tags.forEach(function(tag) {
+        make[tag] = function() {
+          return document.createElement(tag);
+        };
+      });
 		</script>
 		<script type='text/javascript'>
 			var h1 = make.h1();
