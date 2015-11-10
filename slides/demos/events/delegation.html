@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+	<head>
+		
+		<style>
+			* {font-family: Consolas, Monaco, Menlo, monospace; font-size: 1.2em}
+			a {display: block; margin-left: 20px;}
+			div {margin-left: 20px;}
+		</style>
+	</head>
+
+	<body class="container">
+		&lt;body&gt;
+		<div class="well">
+			&lt;div&gt;
+			<a href="javascript://">&lt;a&gt;&lt;/a&gt;</a>
+			<a href="javascript://">&lt;a&gt;&lt;/a&gt;</a>
+			&lt;/div&gt;
+		</div>
+		&lt;/body&gt;
+		<script src="jquery.js"></script>
+		<script type="text/javascript">
+			/**
+			 * What happens if we change "A" to "DIV"
+			 */
+			
+			
+			document.body.addEventListener("click", function(ev){
+				if(ev.target.nodeName === "A") {
+					console.log("clicked on an anchor!");
+					// do stuff!	
+				}
+			}, false);
+			
+		</script>
+	</body>
+</html>

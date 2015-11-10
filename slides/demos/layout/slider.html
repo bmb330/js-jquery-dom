@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<style>
+			.slider {
+			    border: solid 1px blue;
+			    background-color: red;
+			    height: 40px;
+			    width: 40px;
+			    cursor: ew-resize;
+			}
+			.container {
+			    border: solid 4px black;
+			    padding: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='container'>
+		    <div class='slider' id='progress-slider'></div>
+		</div>
+		<div>Value <strong id='progress'>0.5</strong></div>
+		
+		<br/></br>
+		<div class='container'>
+		    <div class='slider' id='padding-slider'></div>
+		</div>
+		<div>Container Padding <strong id='padding'>0.5</strong></div>
+		
+		<div class='container'>
+		    <div class='slider' id='height-width-slider'></div>
+		</div>
+		<div>Height / Width <strong id='height-width'>0.5</strong></div>
+		
+		<script src="jquery.js"></script>
+		<script src="jquerypp.custom.js"></script>
+		<script src="can.custom.js"></script>
+		<script src="slider.js"></script>
+		<script>
+
+			new Slider("#progress-slider",{
+			    value: 0.5
+			});
+			
+			$("#progress-slider").bind("change",function(ev, value){
+			     $("#progress").html(value)
+			});
+			
+			new Slider("#padding-slider",{
+			    value: 0.1
+			});
+			new Slider("#height-width-slider",{
+			    value: 0.5
+			});
+			
+			$("#padding-slider").bind("change",function(ev, value){
+			     $("#padding").html(Math.round(40*value));
+			     $("#progress-slider").parent().css({
+			     	padding: 40*value
+			     }).trigger("resize");
+			}).trigger("change",0.1);
+			
+			 $("#height-width-slider").bind("change",function(ev, value){
+			     $("#height-width").html(Math.round(40*value+10));
+			     $("#progress-slider").css({
+			     	height: 60*value+10,
+			     	width: 60*value+10
+			     }).trigger("resize");
+			}).trigger("change",0.5);
+			
+			
+		</script>
+	</body>
+</html>

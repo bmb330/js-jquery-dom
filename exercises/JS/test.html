@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>My JS Test</title>
+	<link rel="stylesheet" href="../lib/qunit.css">
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+	<script src="my_js.js"></script>
+	<script src="../lib/qunit.js"></script>
+	<script>
+		var Person = function(name){
+			this.name = name;
+		}
+		
+		Person.prototype.species = 'Homo Sapien';
+		Person.prototype.speak =function(toWhom) { 
+			return 'Hello ' + toWhom + '. My name is ' + this.name + '.';
+		}
+
+		module('new, dot, and dotcall');
+
+		test('DOT', function(){
+			var person = new Person('Alexis');
+			var species = DOT(person, 'species');
+
+			equal(species, 'Homo Sapien', 'property accessed');
+
+		});
+
+		test('DOTCALL', function() {
+			var person = new Person('Alexis');
+			var speak = DOTCALL(person, 'speak', ['Justin']);
+
+			var greet = 'Hello Justin. My name is Alexis.';
+			equal(speak, greet, 'method called with argument');
+		});
+
+		test('NEW', function(){
+			var person = NEW(Person, ['Alexis']);
+			
+			equal(person.name, 'Alexis', 'new function called');
+		});
+
+		test('INSTANCEOF', function() {
+			var person = new Person('Alexis');
+			ok(INSTANCEOF(person, Person), 'person is an instanceof Person');
+			ok(INSTANCEOF(person, Object), 'person is an instanceof Object');
+			equal(INSTANCEOF(person, Array), false, 'person is not an instanceof Array');
+		});
+	</script>
+</body>
+</html>

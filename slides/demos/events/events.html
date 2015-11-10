@@ -1,0 +1,245 @@
+<html class="resize">
+	<head>
+		<link href="bootstrap.css" rel="stylesheet"/>
+		<link href="animate.css" rel="stylesheet"/>
+		<style>
+			.pointer {
+				cursor: pointer;
+			}
+
+			.vis-mouseenter {
+				padding: 20px;
+				margin: 10px;
+			}
+
+			body, table {
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body class="container-fluid">
+		<div class="col-md-8">
+			<h2>Types of events</h2>
+			<form class="submit reset">
+				<table class="table">
+					<tr>
+						<th colspan="2">
+							Mouse Events
+						</th>
+					</tr>
+					<tr>
+						<td id="clicked">click</td>
+						<td class="click pointer" >
+							When a click happens on the same screen location.  Happens after the mouseup.
+						</td>
+					</tr>
+					<tr>
+						<td id="dblclicked">dblclick</td>
+						<td class="dblclick pointer" >
+							When two clicks happen on the same screen location.  Happens after the second click.
+						</td>
+					</tr>
+					<tr>
+						<td id="contextmenued">contextmenu</td>
+						<td class="contextmenu pointer">
+							Called when the right mouse button is clicked.
+						</td>
+					</tr>
+					<tr>
+						<td  id="mousedowned">mousedown</td>
+						<td class="mousedown pointer">
+							Called when the mouse is pressed down.
+						</td>
+					</tr>
+					<tr>
+						<td  id="mouseuped" >mouseup</td>
+						<td class="mouseup pointer">
+							Called when a mouse button raises.
+						</td>
+					</tr>
+					<tr>
+						<td  id="mouseovered">mouseover</td>
+						<td class="mouseover pointer">
+							Called when a mouse moves over an element.
+						</td>
+					</tr>
+					<tr>
+						<td  id="mouseouted">mouseout</td>
+						<td  class="mouseout pointer">
+							Called when a mouse moves out of an element
+						</td>
+					</tr>
+					<tr>
+						<td id="mousemoveed">mousemove</td>
+						<td  class="mousemove pointer">
+							Called when a mouse moves at least 1 pixel over an element.
+						</td>
+					</tr>
+					<tr><td id="mouseentered"> mouseenter </td>
+						<td class="mouseenter">Called when mouse enters an element from outside elements.</td>
+					</tr> 
+					<tr><td id="mouseleaveed"> mouseleave </td>
+						<td class="mouseleave">Called when mouse leaves an element to outside elements.</td>
+					</tr>
+					<tr><th colspan="2">HTML Events</th></tr>
+					<tr>
+						<td id="loaded" >
+							load
+						</td>
+						<td>
+							Occurs when the DOM implementation finishes loading all 
+							content within a document, all frames within a FRAMESET, or an OBJECT element.
+						</td>
+					</tr>
+					<tr><td id="domloaded">DOMContentLoaded</td>
+						<td>Called when the document is ready and parsed, but before images and other resources are loaded</td>
+					</tr> 
+					<tr><td class="unload"> unload </td>
+						<td>Occurs when the DOM implementation removes a document from a window or frame.</td>
+					</tr>
+					<tr><td class="abort"> abort </td>
+						<td>Occurs when page loading is stopped before an image has been allowed to completely load.</td>
+					</tr>
+					
+					<tr><td class="error"> error </td>
+						<td>Occurs when an image does not load properly or when an error occurs during script execution.</td>
+					</tr>
+					
+					<tr><td id="selected"> select </td>
+						<td>
+							Occurs when a user selects some text in a text field. <input class="select" value="select this text"/>
+						</td>
+					</tr>
+					
+					<tr><td id="changeed"> change </td>
+						<td>Called after a control loses focus and its value is different.
+							<select  class="change">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+							<input class="change" value="change this text"/>
+							<input type="radio" class="change" name="change_choice" value="1" /> 1 or
+							<input type="radio" class="change" name="change_choice" value="2"/> 2
+							
+							<input type="checkbox" class="change" name="change_choice2" value="1" /> this or
+							<input type="checkbox" class="change" name="change_choice2" value="2"/> that
+						</td>
+					</tr>
+					<tr><td id="reseted"> reset </td>
+						<td>
+							Calls when a form is reset. <input type="reset" class="btn btn-default" value="Reset"/>
+						</td>
+					</tr>
+					<tr><td id="submited"> submit </td>
+						<td>When a form is submitted, you can return false to cancel. 
+							<input type="submit" class="btn btn-default" value="Submit me"/>
+						</td>
+					</tr>
+					
+					<tr><td id="focused" > focus </td>
+						<td>
+							<input class="focus" value="focus me"/>
+						</td>
+					</tr>
+					<tr><td id="blured"> blur </td>
+						<td>
+							<input class="blur" value="Blur me"/>
+						</td>
+					</tr>
+					
+					<tr><td id="resizeed"> resize </td>
+						<td>
+							Occurs when a frameset or document is resized.
+						</td>
+						
+					</tr>
+					
+					<tr><td id="scrolled"> scroll </td>
+						<td >
+							<div class="scroll bg-info" style="height: 50px; overflow: auto">
+								<div>Large block<br/>
+								1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2">Key Events</th>
+					</tr>  
+					
+					<tr><td id="keydowned"> keydown </td>
+						<td>
+							<input type="input" value="" class="keydown"/>
+						</td>
+					</tr>
+					<tr><td id="keypressed"> keypress </td>
+						<td>
+							<input type="input" value="" class="keypress"/>
+						</td>
+					</tr>
+					<tr><td id="keyuped" class="keyup"> keyup </td>
+						<td>
+							<input type="input" value="" class="keyup"/>
+						</td>
+					</tr>
+					<tr><td id="inputed" class="input"> input </td>
+						<td>
+							<input type="input" value="" class="input"/>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2">Common Synthetic Events</th>
+					</tr> 
+					<tr><td id="readyed"> ready </td>
+						<td>Called when the document is ready and parsed, but before images and other resources are loaded</td>
+					</tr>
+				</table>
+			</form>
+
+
+			<h3>mouseenter vs mouseover</h3>
+
+			<div class="col-md-4 vis-mouseenter bg-info">
+				<strong>Outer</strong>
+				mouseenter: <span class="enter">0</span>
+				mouseleave: <span class="leave">0</span>
+
+				<div class="vis-mouseenter bg-danger">
+					<strong>Inner</strong>
+					mouseenter: <span class="enter">0</span> 
+					mouseleave: <span class="leave">0</span>
+				</div>
+			</div>
+
+			<div class="col-md-4 vis-mouseenter bg-info">
+				<strong>Outer</strong>
+				mouseover: <span class="over">0</span>
+				mouseout: <span class="out">0</span>
+
+				<div class="vis-mouseenter bg-danger">
+					<strong>Inner</strong>
+					mouseover: <span class="over">0</span> 
+					mouseout: <span class="out">0</span>
+				</div>
+			</div>
+
+			<div style="height: 500px;"></div>
+		</div>
+
+		<div class="col-md-4 font-size-large well">
+			<h2>
+				Event data
+				<small>
+					<input id="filter" type="checkbox" checked> Moz/Webkit/Caps</input>
+				</small>
+			</h2>
+			<strong>{</strong><br/>
+			<ul id="event-data" style="padding-left: 25px;" class="list-unstyled"></ul>
+			<strong>}</strong>
+		</div>
+
+		<script src="jquery.js"></script>
+		<script src="events.js"></script>
+	</body>
+</html>
