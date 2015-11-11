@@ -18,9 +18,16 @@ DOTCALL = function(obj, prop, args){
 
 // 06 Prototypes
 NEW = function(constructor, args){
-
+  var obj = {};
+  obj.__proto__ = constructor.prototype;
+  constructor.apply(obj, args);
+  return obj;
 }
 
 INSTANCEOF = function(obj, constructor){
-
+  if (obj === null)
+    return false;
+  if (obj.__proto__ === constructor.prototype)
+    return true;
+  return INSTANCEOF(obj.__proto__, constructor);
 }
