@@ -1,5 +1,9 @@
 (function() {
-  $ = function(selector) {};
+  $ = function(selector) {
+    var elements = document.querySelectorAll(selector);
+    Array.prototype.push.apply(this, elements);
+    this.length = elements.length;
+  };
 
   $.extend = function(target, object) {
     for (var key in object) {
