@@ -59,6 +59,19 @@
     }
   });
 
+  var getText = function(el) {
+    var txt = '';
+    $.each(el.childNodes, function(i, childNode) {
+      if (childNode.nodeType === Node.TEXT_NODE) {
+        txt += childNode.nodeValue;
+      }
+      else if (childNode.nodeType === Node.ELEMENT_NODE) {
+        txt += getText(childNode);
+      }
+    });
+    return txt;
+  };
+
   $.extend($.prototype, {
     html: function(newHtml) {
       if (arguments.length) {
@@ -80,7 +93,17 @@
         return this[0].value;
       }
     },
-    text: function(newText) {},
+    text: function(newText) {
+      if (arguments.length) {
+        this.html('');
+        return $.each(this, function(i, el) {
+          el.appendChild(document.createTextNode(newText));
+        });
+      }
+      else {
+        return this[0] && getText(this[0]);
+      }
+    },
     find: function(selector) {},
     next: function() {},
     prev: function() {},
