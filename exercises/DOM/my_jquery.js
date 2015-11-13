@@ -1,5 +1,9 @@
 (function() {
   $ = function(selector) {
+    if (!(this instanceof $)) {
+      return new $(selector);
+    }
+
     var elements = document.querySelectorAll(selector);
     Array.prototype.push.apply(this, elements);
     this.length = elements.length;
