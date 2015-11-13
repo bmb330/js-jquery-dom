@@ -80,6 +80,24 @@
     return txt;
   };
 
+  var makeTraverser = function(cb) {
+    return function() {
+      var elements = [];
+      var args = arguments;
+
+      $.each(this, function(i, el) {
+        var ret = cb.apply(el, args);
+
+        if (isArrayLike(ret))
+          Array.prototype.push.apply(elements, ret);
+        else if (ret)
+          elements.push(ret);
+      });
+
+      return $(elements);
+    };
+  };
+
   $.extend($.prototype, {
     html: function(newHtml) {
       if (arguments.length) {
@@ -120,25 +138,33 @@
       return $(elements);
     },
     next: function() {
-      var elements = [];
-      
-      $.each(this, function(i, el) {
-        var curr = el.nextSibling;
+      var curr = el.nextSibling;
 
-        while (curr && curr.nodeType !== Node.ELEMENT_NODE) {
-          curr = curr.nextSibling;
-        }
+      while (curr && curr.nodeType !== Node.ELEMENT_NODE) {
+        curr = curr.nextSibling;
+      }
 
-        if (curr) {
-          elements.push(curr);
-        }
-      });
-      
-      return $(elements);
+      if (curr) {
+        elements.push(curr);
+      }
     },
-    prev: function() {},
-    parent: function() {},
-    children: function() {},
+    prev: makeTraverser(function() {
+      var curr = el.previousSibling;
+
+      while (curr && curr.nodeType !== Node.ELEMENT_NODE) {
+        curr = curr.previousSibling;
+      }
+
+      if (curr) {
+        elements.push(curr);
+      }
+    }),
+    parent: makeTraverser(function() {
+      return this.parentNode;
+    }),
+    children: makeTraverser(function() {
+      return this.children;
+    }),
     attr: function(attrName, value) {},
     css: function(cssPropName, value) {},
     width: function() {},
