@@ -119,7 +119,23 @@
       });
       return $(elements);
     },
-    next: function() {},
+    next: function() {
+      var elements = [];
+      
+      $.each(this, function(i, el) {
+        var curr = el.nextSibling;
+
+        while (curr && curr.nodeType !== Node.ELEMENT_NODE) {
+          curr = curr.nextSibling;
+        }
+
+        if (curr) {
+          elements.push(curr);
+        }
+      });
+      
+      return $(elements);
+    },
     prev: function() {},
     parent: function() {},
     children: function() {},
