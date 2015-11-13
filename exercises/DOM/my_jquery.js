@@ -4,7 +4,15 @@
       return new $(selector);
     }
 
-    var elements = document.querySelectorAll(selector);
+    var elements;
+
+    if (typeof selector === 'string') {
+      elements = document.querySelectorAll(selector)
+    }
+    else {
+      elements = selector;
+    }
+
     Array.prototype.push.apply(this, elements);
     this.length = elements.length;
   };
@@ -104,7 +112,13 @@
         return this[0] && getText(this[0]);
       }
     },
-    find: function(selector) {},
+    find: function(selector) {
+      var elements = [];
+      $.each(this, function(i, el) {
+        Array.prototype.push.apply(elements, el.querySelectorAll(selector));
+      });
+      return $(elements);
+    },
     next: function() {},
     prev: function() {},
     parent: function() {},
