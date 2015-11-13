@@ -66,7 +66,16 @@
         return this[0].innerHTML;
       }
     },
-    val: function(newVal) {},
+    val: function(newVal) {
+      if (arguments.length) {
+        return $.each(this, function(i, el) {
+          el.value = newVal;
+        });
+      }
+      else {
+        return this[0].value;
+      }
+    },
     text: function(newText) {},
     find: function(selector) {},
     next: function() {},
