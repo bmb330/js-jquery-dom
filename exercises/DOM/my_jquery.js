@@ -88,7 +88,7 @@
       $.each(this, function(i, el) {
         var ret = cb.apply(el, args);
 
-        if (isArrayLike(ret))
+        if (ret && isArrayLike(ret))
           Array.prototype.push.apply(elements, ret);
         else if (ret)
           elements.push(ret);
@@ -137,26 +137,26 @@
       });
       return $(elements);
     },
-    next: function() {
-      var curr = el.nextSibling;
+    next: makeTraverser(function() {
+      var curr = this.nextSibling;
 
       while (curr && curr.nodeType !== Node.ELEMENT_NODE) {
         curr = curr.nextSibling;
       }
 
       if (curr) {
-        elements.push(curr);
+        return curr;
       }
-    },
+    }),
     prev: makeTraverser(function() {
-      var curr = el.previousSibling;
+      var curr = this.previousSibling;
 
       while (curr && curr.nodeType !== Node.ELEMENT_NODE) {
         curr = curr.previousSibling;
       }
 
       if (curr) {
-        elements.push(curr);
+        return curr;
       }
     }),
     parent: makeTraverser(function() {
@@ -165,8 +165,26 @@
     children: makeTraverser(function() {
       return this.children;
     }),
-    attr: function(attrName, value) {},
-    css: function(cssPropName, value) {},
+    attr: function(attrName, value) {
+      if (arguments.length > 1) {
+        return $.each(this,function(i, el) {
+          el.setAttribute(attrName, value);
+        });
+      }
+      else {
+        return this[0] && this[0].getAttribute(attrName);
+      }
+    },
+    css: function(cssPropName, value) {
+      if (arguments.length > 1) {
+        return $.each(this, function(i, el) {
+          el.style[cssPropName] = value;
+        });
+      }
+      else {
+        return this[0] && document.defaultView.getComputedStyle(this[0]).getPropertyValue(cssPropName);
+      }
+    },
     width: function() {},
     offset: function() {
       var offset = this[0].getBoundingClientRect();
