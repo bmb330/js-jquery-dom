@@ -185,7 +185,11 @@
         return this[0] && document.defaultView.getComputedStyle(this[0]).getPropertyValue(cssPropName);
       }
     },
-    width: function() {},
+    width: function() {
+      var leftPadding = this.css('padding-left');
+      var rightPadding = this.css('padding-right');
+      return this[0].clientWidth - parseInt(leftPadding) - parseInt(rightPadding);
+    },
     offset: function() {
       var offset = this[0].getBoundingClientRect();
       return {
@@ -193,12 +197,24 @@
         left: offset.left + window.pageXOffset
       };
     },
-    hide: function() {},
-    show: function() {},
+    hide: function() {
+      return this.css('display', 'none');
+    },
+    show: function() {
+      return this.css('display', '');
+    },
 
     // Events
-    bind: function(eventName, handler) {},
-    unbind: function(eventName, handler) {},
+    bind: function(eventName, handler) {
+      return $.each(this, function(i, el) {
+        el.addEventListener(eventName, handler, false);
+      });
+    },
+    unbind: function(eventName, handler) {
+      return $.each(this, function(i, el) {
+        el.removeEventListener(eventName, handler, false);
+      });
+    },
     has: function(selector) {
       var elements = [];
 	
@@ -227,8 +243,10 @@
     // Extra
     addClass: function(className) {},
     removeClass: function(className) {},
-    append: function(element) {}
+    append: function(element) {},
   });
+
+  $.fn = $.prototype
 
   $.buildFragment = function(html) {};
 })();
